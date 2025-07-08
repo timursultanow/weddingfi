@@ -499,7 +499,7 @@ function ToastScreen() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/weddingfi">
       <Routes>
         <Route path="/" element={<MainScreen />} />
         <Route path="/info" element={<InfoScreen />} />
