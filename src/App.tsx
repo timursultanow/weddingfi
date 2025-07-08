@@ -72,6 +72,75 @@ function downloadICS() {
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+// --- Whitepaper Data ---
+const WHITEPAPER_CARDS = [
+  {
+    title: 'WeddingFi v1.0',
+    content: <>
+      <b>объединение сердец на блокчейне жизни</b>
+    </>,
+  },
+  {
+    title: 'Миссия',
+    content: <>
+      Объединить два уникальных токена в устойчивый ликвидный пул с HODL-стратегией и Layer-1 совместимостью.
+    </>,
+  },
+  {
+    title: 'Токеномика',
+    content: <>
+      <table style={{width:'100%', fontSize:'1rem', margin:'8px 0'}}>
+        <thead><tr><th>Компонент</th><th>Доля</th><th>Описание</th></tr></thead>
+        <tbody>
+          <tr><td>❤️ Любовь</td><td>50%</td><td>Стабильность пула</td></tr>
+          <tr><td>🤝 Доверие</td><td>30%</td><td>TVL семьи</td></tr>
+          <tr><td>😂 Мемы</td><td>20%</td><td>Устойчивость в просадках</td></tr>
+        </tbody>
+      </table>
+    </>,
+  },
+  {
+    title: 'TGE (Token Generation Event)',
+    content: <>
+      <div>📅 27 июля 2025<br/>🕒 16:30<br/>📍 Москва, ул. Примерная, д. 1</div>
+      <div style={{marginTop:8, fontSize:'0.98rem', color:'#aaa'}}>транзакция будет записана в главный блок истории. подтвердите метамаской... шутка, просто приходите вовремя</div>
+    </>,
+  },
+  {
+    title: 'Roadmap',
+    content: <>
+      <table style={{width:'100%', fontSize:'1rem', margin:'8px 0'}}>
+        <thead><tr><th>Этап</th><th>Статус</th></tr></thead>
+        <tbody>
+          <tr><td>Matchmaking</td><td>✅ Завершён</td></tr>
+          <tr><td>Proposal Token</td><td>✅ Запущен</td></tr>
+          <tr><td>Liquidity Pool (брак)</td><td>🔜 Июль 2025</td></tr>
+          <tr><td>NFT of Kids</td><td>🕐 TBD</td></tr>
+          <tr><td>Multichain Budget</td><td>🕐 TBD</td></tr>
+        </tbody>
+      </table>
+    </>,
+  },
+  {
+    title: 'Farming opportunities',
+    content: <>
+      <div>📈 после 00:00, под медляк<br/>→ LP токен: LOVE-WED<br/>→ YIELD: 💋 + 💃<br/>→ APY: бесконечная, если HODLить правильно</div>
+    </>,
+  },
+  {
+    title: 'Аудит',
+    content: <>
+      <div>контракт проверен мамами<br/>KYC пройден тётушками на welcome-зоне</div>
+    </>,
+  },
+  {
+    title: 'Disclaimer',
+    content: <>
+      DYOR (do your own романтика). отношения не являются финансовой рекомендацией.
+    </>,
+  },
+];
+
 function MainScreen() {
   useTelegramInit();
   const theme = useTelegramTheme();
@@ -97,6 +166,7 @@ function MainScreen() {
         <button className="main-btn" style={{background: theme.button_color, color: theme.button_text_color}} onClick={() => navigate('/quiz')}>🧠 экзамен</button>
         <button className="main-btn" style={{background: theme.button_color, color: theme.button_text_color}} onClick={() => navigate('/alcometer')}>🍹 алкометр</button>
         <button className="main-btn" style={{background: theme.button_color, color: theme.button_text_color}} onClick={() => navigate('/toast')}>🎤 говори красиво</button>
+        <button className="main-btn" style={{background: theme.button_color, color: theme.button_text_color}} onClick={() => navigate('/whitepaper')}>📄 whitepaper</button>
       </div>
     </div>
   );
@@ -497,6 +567,41 @@ function ToastScreen() {
   );
 }
 
+function WhitepaperScreen() {
+  const [idx, setIdx] = useState(0);
+  const touchStartX = useRef<number|null>(null);
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (dx > 60 && idx > 0) setIdx(idx-1);
+    if (dx < -60 && idx < WHITEPAPER_CARDS.length-1) setIdx(idx+1);
+    touchStartX.current = null;
+  };
+  return (
+    <div className="App">
+      <div className="header"><div className="title">📄 whitepaper</div></div>
+      <div
+        className="event-card"
+        style={{minHeight:220, maxWidth:380, margin:'32px auto', position:'relative', overflow:'hidden'}}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        <div style={{fontWeight:700, fontSize:'1.1rem', marginBottom:10}}>{WHITEPAPER_CARDS[idx].title}</div>
+        <div>{WHITEPAPER_CARDS[idx].content}</div>
+        <div style={{position:'absolute', bottom:12, left:0, right:0, textAlign:'center', fontSize:13, color:'#888'}}>
+          {idx+1} / {WHITEPAPER_CARDS.length}
+        </div>
+        {idx > 0 && <div style={{position:'absolute', left:8, top:'50%', fontSize:28, color:'#1976d2', opacity:0.5, userSelect:'none'}}>&larr;</div>}
+        {idx < WHITEPAPER_CARDS.length-1 && <div style={{position:'absolute', right:8, top:'50%', fontSize:28, color:'#1976d2', opacity:0.5, userSelect:'none'}}>&rarr;</div>}
+      </div>
+      <button className="info-bottom-btn" onClick={() => window.history.back()}>← Назад</button>
+    </div>
+  );
+}
+
 function App() {
   return (
     <Router basename="/weddingfi">
@@ -506,6 +611,7 @@ function App() {
         <Route path="/quiz" element={<QuizScreen />} />
         <Route path="/alcometer" element={<AlcometerScreen />} />
         <Route path="/toast" element={<ToastScreen />} />
+        <Route path="/whitepaper" element={<WhitepaperScreen />} />
       </Routes>
     </Router>
   );
