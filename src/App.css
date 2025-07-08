@@ -1,5 +1,248 @@
+:root {
+  --tg-bg: #000;
+  --tg-text: #fff;
+  --tg-btn: #1976d2;
+  --tg-btn-text: #fff;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
 .App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: var(--tg-bg);
+  color: var(--tg-text);
+}
+
+.header {
+  margin-top: 32px;
   text-align: center;
+}
+
+.title {
+  font-size: 2.3rem;
+  font-weight: 900;
+  margin-bottom: 0.5em;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 2em;
+  color: #fff;
+}
+
+.main-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto 2em auto;
+}
+
+.main-btn {
+  background: var(--tg-btn);
+  color: var(--tg-btn-text);
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  padding: 16px 0;
+  margin-bottom: 18px;
+  width: 100%;
+  max-width: 340px;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s;
+}
+.main-btn:active {
+  filter: brightness(1.2);
+}
+
+.event-card {
+  background: #111;
+  border: none;
+  border-radius: 14px;
+  box-shadow: none;
+  padding: 22px 20px 16px 20px;
+  margin: 0 auto 18px auto;
+  max-width: 340px;
+  text-align: left;
+  font-family: 'Montserrat', Arial, sans-serif;
+  position: relative;
+}
+.event-row {
+  margin-bottom: 0.2em;
+  font-size: 1.05rem;
+}
+.event-map {
+  display: inline-block;
+  margin-top: 0.7em;
+  color: #1E88E5;
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.event-ics {
+  margin-top: 1em;
+  background: #1E88E5;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 10px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #0003;
+}
+.event-ics:active,
+.event-ics:hover {
+  background: #42a5f5;
+}
+
+.timer-label-fat {
+  margin-top: 18px;
+  font-size: 1.1rem;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+}
+.timer-fat {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 12px 0 6px 0;
+  font-size: 1.3rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+  user-select: none;
+}
+.timer-fat-cell {
+  background: #181a1a;
+  border-radius: 8px;
+  box-shadow: none;
+  padding: 7px 10px 4px 10px;
+  min-width: 36px;
+  text-align: center;
+  margin: 0 1px;
+  display: inline-block;
+  font-size: 1.25em;
+}
+
+.timer-phrase {
+  margin: 10px 0 18px 0;
+  font-size: 1.05rem;
+  color: #fff;
+  text-align: center;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.event-lifehack-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px #0003;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 16px auto;
+  display: block;
+}
+.event-lifehack-btn:active,
+.event-lifehack-btn:hover {
+  background: #222;
+  color: #fff;
+}
+.event-lifehacks {
+  background: #000;
+  border: none;
+  border-radius: 12px;
+  margin: 10px auto 18px auto;
+  padding: 12px 18px;
+  max-width: 340px;
+  color: #fff;
+  font-size: 1.01rem;
+  font-weight: 500;
+  box-shadow: none;
+}
+.event-lifehack-row {
+  margin-bottom: 0.5em;
+}
+.event-bottom-phrase {
+  margin: 32px 0 12px 0;
+  color: #888;
+  font-size: 0.98rem;
+  text-align: center;
+  border-top: 1px solid #222;
+  padding-top: 10px;
+  font-weight: 500;
+}
+
+.info-bottom-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #0003;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto 18px auto;
+  display: block;
+}
+.info-bottom-btn:active,
+.info-bottom-btn:hover {
+  background: #222;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 0 8px;
+  }
+  .main-buttons {
+    max-width: 100%;
+  }
+  .event-card, .event-lifehack-btn, .event-lifehacks, .info-bottom-btn {
+    max-width: 100%;
+  }
+}
+
+/* Анимация курсора */
+.title::after {
+  content: '';
 }
 
 .App-logo {
